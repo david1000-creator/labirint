@@ -2,9 +2,10 @@ from pygame import*
 from const import*
 from game_sprite import GameSprite
 class Player(GameSprite):
-    def __init__ (self, img, x, y, size, speed = 3):
+    def __init__ (self, img, x, y, size, speed = 3, hp = 3):
         super().__init__(img, x, y, size)
         self.speed = speed
+        self.hp = hp
     def update(self, up, down,left, right):
         keys_pressed = key.get_pressed()
         if keys_pressed[up] and self.rect.y > 0:

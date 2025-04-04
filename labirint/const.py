@@ -4,3 +4,5 @@ FPS = 60
 SIZE = 70
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
+HERO_X = 50
+HERO_Y= 250
