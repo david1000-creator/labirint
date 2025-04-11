@@ -42,6 +42,10 @@ hero = Player("src/hero.png", HERO_X, HERO_Y,  (SIZE, SIZE))
 cyborg = Enemy("src/cyborg.png", WIN_W-100, 250,  (SIZE, SIZE))
 treasure = GameSprite("src/treasure.png", WIN_W-200, 400, (SIZE, SIZE))
 
+sprites_list = [hero, treasure] + walls
+sprites = sprite.Group()
+for s in sprites_list:
+    sprites.add(s)
 
 # игровой цикл
 game = True
@@ -55,7 +59,7 @@ while game:
         cyborg.draw(window)
         treasure.draw(window)
         hero.update(K_w, K_s, K_a, K_d)
-        cyborg.update(396, 650)
+        cyborg.forward()
 
         if sprite.collide_rect(hero, cyborg) or hero.hp <= 0:
             death.play()
@@ -66,6 +70,10 @@ while game:
             win.play()
             window.blit(won, (150, 200))
             finish = True
+        
+        for c in sprites:
+            if sprite.collide_rect(cyborg, c):
+                cyborg.update_pos(c)
 
         for wall in walls:
             if sprite.collide_rect(wall, hero):

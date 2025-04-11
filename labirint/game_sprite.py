@@ -16,9 +16,12 @@ class GameSprite(sprite.Sprite):
     def draw(self, window):
         window.blit(self.image, (self.rect.x, self.rect.y))
 
-    def intersection(self, sprite):
-        left = max(self.rect.left, sprite.rect.left)
-        width = min(self.rect.right, sprite.rect.right) - left
-        top = max(self.rect.top, sprite.rect.top)
-        height = min(self.rect.bottom, sprite.rect.bottom) - top
-        return Rect(left, top, width, height)
+    def intersection(self, other):
+        if self.rect.midtop[1] > other.rect.midtop[1]:
+            return "top"
+        elif self.rect.midleft[0] > other.rect.midleft[0]:
+            return "left"
+        elif self.rect.midright[0] < other.rect.midright[0]:
+            return "right"
+        else:
+            return "bottom"
